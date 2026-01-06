@@ -13,8 +13,8 @@ export function Presentation() {
     // Add a newline character after the emoji
     description:
       "Hey 👋\nI'm Priyansh, a 21-year-old AI Engineer who loves building automations that actually make life easier (and cooler).\n\nWhen I’m not coding, I’m either experimenting with new projects, cooking up ideas, or fixing the bugs I proudly created myself.",
-    src: '/profile-priyansh.jpg',
-    fallbackSrc: '/profile-priyansh.jpg',
+    src: '/profile-priyansh.png',
+    fallbackSrc: '/profile-priyansh.png',
   };
 
   // Animation variants for text elements
