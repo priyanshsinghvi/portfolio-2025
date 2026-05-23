@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { ChatbaseEmbed } from "@/components/chatbase-embed";
 import Script from "next/script";
 import "./globals.css";
 
@@ -91,50 +92,6 @@ export default function RootLayout({
             `,
           }}
         />
-        <Script
-  id="chatbase-script"
-  strategy="afterInteractive"
-  dangerouslySetInnerHTML={{
-    __html: `
-      (function() {
-        if (
-          !window.chatbase ||
-          window.chatbase("getState") !== "initialized"
-        ) {
-          window.chatbase = (...arguments) => {
-            if (!window.chatbase.q) {
-              window.chatbase.q = [];
-            }
-            window.chatbase.q.push(arguments);
-          };
-
-          window.chatbase = new Proxy(window.chatbase, {
-            get(target, prop) {
-              if (prop === "q") {
-                return target.q;
-              }
-              return (...args) => target(prop, ...args);
-            },
-          });
-        }
-
-        const onLoad = function() {
-          const script = document.createElement("script");
-          script.src = "https://www.chatbase.co/embed.min.js";
-          script.id = "dR86fHlsKWsFRJG6s0Fe2";
-          script.domain = "www.chatbase.co";
-          document.body.appendChild(script);
-        };
-
-        if (document.readyState === "complete") {
-          onLoad();
-        } else {
-          window.addEventListener("load", onLoad);
-        }
-      })();
-    `,
-  }}
-/>
       </head>
       <body
         className={cn(
@@ -154,6 +111,7 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
         <Analytics />
+        <ChatbaseEmbed />
       </body>
     </html>
   );
